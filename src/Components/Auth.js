@@ -28,21 +28,22 @@ class Auth extends Component {
     login = (username, password) => {
         axios.post('/auth/login', {username,password})
         .then(res =>{
-            this.props.getUser(res.data)
+            this.props.getUser(res.data.id)
             this.props.history.push('/Dashboard')
         })
     }
 
-    register = (username,password,profilePic) => { 
-        axios.post('/auth/register', {username,password, profilePic})
+    register = (username,password) => { 
+        const profile_pic = `https://robohash.org/${username}.png`
+        axios.post('/auth/register', {username,password, profile_pic})
         .then(res => {
-            this.props.getUser(res.data)
+            this.props.getUser(res.data.id)
             this.props.history.push('/Dashboard')
         })
     }
 
     render(){
-        const {username, password,profilePic, loginToggle} = this.state; 
+        const {username, password, loginToggle} = this.state; 
         return( 
             <div>
                 {loginToggle ? (<button onClick = {this.toggleLogin}>Go to Register</button>): 
@@ -66,7 +67,7 @@ class Auth extends Component {
                     value = {password}
                     />  
                 </section>
-                {loginToggle ? (<button onClick = {() => this.login(username,password)}>Submit Login</button>) :(<button onClick = {() => this.register(username,password,profilePic)}>Submit Register</button>)
+                {loginToggle ? (<button onClick = {() => this.login(username,password)}>Submit Login</button>) :(<button onClick = {() => this.register(username,password)}>Submit Register</button>)
                 }
             </div>
         )
@@ -76,5 +77,6 @@ class Auth extends Component {
 function mapStateToProps(state){ 
     return{user:state.reducer.user}
 }
+
 
 export default connect(mapStateToProps,{getUser})(Auth); 

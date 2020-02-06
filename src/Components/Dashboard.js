@@ -1,6 +1,8 @@
 import React,{Component} from 'react'; 
 import Post from './Post';
 import axios from 'axios'; 
+import {connect} from 'react-redux';
+import{getPosts} from '../ducks/reducer'; 
 
 class Dashboard extends Component {
     constructor(){
@@ -8,7 +10,6 @@ class Dashboard extends Component {
         this.state ={ 
             myPost: true, 
             search:'',
-            posts:[]
         }
     }
 
@@ -19,15 +20,11 @@ class Dashboard extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api/posts').then(res => {
-            this.setState({
-                posts: [res.data]
-            })
-        })
+        this.props.getPosts(); 
     }
 
     render(){
-        console.log(this.state.post)
+        console.log(this.props)
         return( 
             <div>
                <section className ='search-bar'>
@@ -37,11 +34,23 @@ class Dashboard extends Component {
                    <p>My Post</p>
                    <input value = {this.state.myPost}type='checkbox' onChange = {() => this.checkbox}/>
                </section>
-            
+               {this.props.posts.map(element => {
+                   return (
+                       <Post 
+                       key = {element.id}
+                       postInfo ={element}
+                       />
+                   )
+               })}
+
 
             </div>
         )
     }
 }
 
-export default Dashboard; 
+function mapStateToProps(state){ 
+    return{posts:state.reducer.posts}
+}
+
+export default connect(mapStateToProps,{getPosts})(Dashboard); 

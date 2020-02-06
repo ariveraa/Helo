@@ -12,8 +12,8 @@ class Nav extends Component {
         else{ 
             return( 
                 <div className = 'nav-bar'>
-                    <img src= {`https://robohash.org/${this.props.username}.png`} alt= 'profile pic'/>
-                    <h2 id= 'username'>{this.props.username}</h2>
+                    <img src= {this.props.user.profile_pic} alt= 'profile pic'/>
+                    <h2 id= 'username'>{this.props.user.username}</h2>
                     <div onClick = {()=> this.props.history.push('/Dashboard') }>Home </div>
                     <div onClick = {()=> this.props.history.push('/New') }>New Post</div>
                     <button className = 'logout' 

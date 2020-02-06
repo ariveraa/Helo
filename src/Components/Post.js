@@ -6,7 +6,8 @@ class Post extends Component {
     render(){
         return( 
             <div>
-                Post
+                <h2 className = 'post-title'>{this.props.postInfo.title} </h2>
+                
             </div>
         )
     }

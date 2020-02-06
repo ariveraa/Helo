@@ -19,23 +19,24 @@ class Form extends Component {
     }
 
     addPost(title, img, content){
-        axios.get('/api/post', {title, img, content}).then(res => 
+        axios.post('/api/post', {title, img, content}).then(res => 
             this.props.history.push('/Dashboard'))
     }
 
 
     render(){
+        const{title,img,content} = this.state
         return( 
             <div>
                 <h3>New Post</h3>
                 <p>Title:</p>
                 <input name = 'title' placeholder = 'enter title' onChange = {event => {this.handleChange(event)}}/>
-                <img/>
+                {/* <img/> */}
                 <p>Image Url:</p>
                 <input name = 'img' placeholder= 'Enter URL' onChange = {event => {this.handleChange(event)}}/> 
                 <p>content:</p>
                 <input name = 'content' placeholder= 'Enter content' onChange = {event => {this.handleChange(event)}}/>
-                <button>Post</button>
+                <button onClick = {() => this.addPost(title,img,content)}>Post</button>
             </div>
         )
     }
