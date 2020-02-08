@@ -34,5 +34,8 @@ app.get('/auth/user', authCtrl.getUser)
 //post endpoints
 app.get('/api/posts', ctrl.getAll)
 app.post('/api/post', ctrl.addPost)
+app.get('/api/post/:id', ctrl.getPost)
+app.get('/api/post', ctrl.searchPosts)
+app.get('/api/mypost', ctrl.notIncludeMyPost)
 
 

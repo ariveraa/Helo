@@ -2,7 +2,8 @@ import React,{Component} from 'react';
 import Post from './Post';
 import axios from 'axios'; 
 import {connect} from 'react-redux';
-import{getPosts} from '../ducks/reducer'; 
+import{getPosts, getUser, searchPost,notIncludeMyPost} from '../ducks/reducer'; 
+import{withRouter} from 'react-router-dom';
 
 class Dashboard extends Component {
     constructor(){
@@ -13,33 +14,74 @@ class Dashboard extends Component {
         }
     }
 
-    checkbox(){
+    checkbox = () => {
+ 
         this.setState({
             myPost: !this.state.myPost
         })
+    
+        
     }
 
+    handleChange = (value) =>{ 
+        this.setState({ 
+            search: value
+        })
+    }
+
+    searchPost(){ 
+        this.props.searchPost(this.state.search); 
+
+    }
+
+    reset = () =>{ 
+        this.setState({ 
+         search: ''
+        })
+        this.props.getPosts();
+    }
+
+    notIncludeMyPost(){ 
+        this.props.notIncludeMyPost();
+    }
+
+    // renderPosts =() => {
+    //     if(this.state.search){ 
+    //         this.props.searchPost(this.state.search); 
+    //     }
+    //     else{
+    //         this.props.getPosts(); 
+    //     }
+    // }
+
     componentDidMount(){
-        this.props.getPosts(); 
+        // this.renderPosts(); 
+        this.props.getPosts();
+        this.props.getUser();
+      
+        if(!this.props.user.id === 0){ 
+            this.props.history.push('/')
+        }
     }
 
     render(){
-        console.log(this.props)
+        console.log(this.state.myPost)
+        
         return( 
             <div>
                <section className ='search-bar'>
-                   <input placeholder= 'Enter search here'/>
-                   <button>Search</button>
-                   <button>Reset</button>
+                   <input placeholder= 'Enter search here' value = {this.state.search} onChange = {event => this.handleChange(event.target.value)} />
+                   <button onClick = {() => this.searchPost(this.state.search)}>Search</button>
+                   <button onClick = {this.reset}>Reset</button>
                    <p>My Post</p>
-                   <input value = {this.state.myPost}type='checkbox' onChange = {() => this.checkbox}/>
+                   <input checked = {this.state.myPost} type='checkbox' onClick = {() => {this.checkbox(); this.notIncludeMyPost(); }}/>
                </section>
                {this.props.posts.map(element => {
+            
                    return (
-                       <Post 
-                       key = {element.id}
-                       postInfo ={element}
-                       />
+                      
+                    <Post info = {element}
+                    key ={element.id} />
                    )
                })}
 
@@ -50,7 +92,9 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state){ 
-    return{posts:state.reducer.posts}
+    return{posts:state.reducer.posts,
+        user: state.reducer.user
+    }
 }
 
-export default connect(mapStateToProps,{getPosts})(Dashboard); 
+export default connect(mapStateToProps,{getPosts, getUser, searchPost,notIncludeMyPost})(Dashboard); 

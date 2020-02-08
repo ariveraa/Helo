@@ -39,7 +39,7 @@ module.exports ={
         res.sendStatus(200); 
     }, 
     getUser: async(req,res) => {
-        
+       
         const{id} = req.session.user;
         const db = req.app.get('db'); 
     
