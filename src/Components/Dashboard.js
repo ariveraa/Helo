@@ -42,7 +42,13 @@ class Dashboard extends Component {
     }
 
     notIncludeMyPost(){ 
+        if(this.state.myPost){
         this.props.notIncludeMyPost();
+        }
+        else{
+            this.props.getPosts();
+        }
+
     }
 
     // renderPosts =() => {
