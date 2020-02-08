@@ -42,7 +42,8 @@ export const searchPost = (search) =>{
 
 const NOT_INCLUDE_MY_POST = 'NOT_INCLUDE_MY_POST'
     export const notIncludeMyPost = () => { 
-        let posts = axios.get(`/api/mypost`).then(res => res.data).catch(err => err.message)
+        let posts = axios.get(`/api/mypost`).then(res => res.data ).catch(err => err.message)
+        console.log(posts)
         return{ 
             type: NOT_INCLUDE_MY_POST,
             payload:posts

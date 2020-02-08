@@ -32,8 +32,8 @@ module.exports ={
     }, 
     notIncludeMyPost: async(req,res) => { 
         const db = req.app.get('db')
-        const {authorId} = req.session.user.id
-
+        const authorId = req.session.user.id 
+        
         const posts = await db.not_include_my_post(authorId)
         res.status(200).send(posts)
     }   

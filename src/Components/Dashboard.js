@@ -74,7 +74,7 @@ class Dashboard extends Component {
                    <button onClick = {() => this.searchPost(this.state.search)}>Search</button>
                    <button onClick = {this.reset}>Reset</button>
                    <p>My Post</p>
-                   <input checked = {this.state.myPost} type='checkbox' onClick = {() => {this.checkbox(); this.notIncludeMyPost(); }}/>
+                   <input checked = {this.state.myPost} type='checkbox' onChange = {() => {this.checkbox(); this.notIncludeMyPost(); }}/>
                </section>
                {this.props.posts.map(element => {
             
