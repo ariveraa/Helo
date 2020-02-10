@@ -64,10 +64,13 @@ class Dashboard extends Component {
         // this.renderPosts(); 
         this.props.getPosts();
         this.props.getUser();
-      
-        if(!this.props.user.id === 0){ 
-            this.props.history.push('/')
-        }
+        console.log(this.props.user)
+
+
+        // console.log()
+        // if(!loggedInUser){ 
+        //     this.props.history.push('/')
+        // }
     }
 
     render(){
@@ -82,15 +85,16 @@ class Dashboard extends Component {
                    <p>My Post</p>
                    <input checked = {this.state.myPost} type='checkbox' onChange = {() => {this.checkbox(); this.notIncludeMyPost(); }}/>
                </section>
-               {this.props.posts.map(element => {
-            
-                   return (
-                      
-                    <Post info = {element}
-                    key ={element.id} />
-                   )
-               })}
-
+               <div id = 'posts-container'>
+                {this.props.posts.map(element => {
+                
+                    return (
+                        
+                        <Post info = {element}
+                        key ={element.id} />
+                    )
+                })}
+                </div>
 
             </div>
         )

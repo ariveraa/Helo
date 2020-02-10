@@ -12,11 +12,13 @@ class Nav extends Component {
         else{ 
             return( 
                 <div className = 'nav-bar'>
-                    <img src= {this.props.user.profile_pic} alt= 'profile pic'/>
+                    <img className = 'profile-pic' src= {this.props.user.profile_pic} alt= 'profile pic'/>
                     <h2 id= 'username'>{this.props.user.username}</h2>
-                    <div onClick = {()=> this.props.history.push('/Dashboard') }>Home </div>
-                    <div onClick = {()=> this.props.history.push('/New') }>New Post</div>
-                    <button className = 'logout' 
+                    <div id ='nav-buttons'>
+                        <div className = 'clickers' onClick = {()=> this.props.history.push('/Dashboard') }>Home </div>
+                        <div className = 'clickers' onClick = {()=> this.props.history.push('/New') }>New Post</div>
+                    </div>
+                    <button id= 'logout' className = 'clickers'
                     onClick ={() =>  axios.post('/auth/logout').then(()=> this.props.history.push('/'))} >Logout</button>
                     
                 </div>

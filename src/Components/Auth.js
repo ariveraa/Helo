@@ -45,30 +45,37 @@ class Auth extends Component {
     render(){
         const {username, password, loginToggle} = this.state; 
         return( 
-            <div>
-                {loginToggle ? (<button onClick = {this.toggleLogin}>Go to Register</button>): 
-                (<button onClick = {this.toggleLogin}>Go to Login</button>)
-                }
-                <img/>
-                <h2>Helo</h2>
-                <section className = 'auth-inputs'>
-                    <p>Username:</p>
-                    <input 
-                    name = 'username'
-                    placeholder = 'Enter Username'
-                    onChange = {event => this.handleChange(event)}
-                    value = {username}
-                    /> 
-                    <p>Password:</p>
-                    <input 
-                    name = 'password'
-                    placeholder = 'Enter password'
-                    onChange = {event => this.handleChange(event)}
-                    value = {password}
-                    />  
-                </section>
-                {loginToggle ? (<button onClick = {() => this.login(username,password)}>Submit Login</button>) :(<button onClick = {() => this.register(username,password)}>Submit Register</button>)
-                }
+            <div className = 'Auth'>
+                <div className = 'auth-box'>
+
+                    
+                    <h2 id = 'auth-title'>Helo</h2>
+                    <section className = 'auth-inputs'>
+                       <div className ='username-box'>
+                            <p>Username:</p>
+                            <input 
+                            name = 'username'
+                            placeholder = 'Enter Username'
+                            onChange = {event => this.handleChange(event)}
+                            value = {username}
+                            /> 
+                        </div>
+                        <div className ='username-box'>
+                            <p>Password:</p>
+                            <input 
+                            name = 'password'
+                            placeholder = 'Enter password'
+                            onChange = {event => this.handleChange(event)}
+                            value = {password}
+                            />  
+                        </div>
+                    </section>
+                    {loginToggle ? (<button onClick = {() => this.login(username,password)}>Submit Login</button>) :(<button onClick = {() => this.register(username,password)}>Submit Register</button>)
+                    }
+                    {loginToggle ? (<button onClick = {this.toggleLogin}>Go to Register</button>): 
+                    (<button onClick = {this.toggleLogin}>Go to Login</button>)
+                    }
+                </div>
             </div>
         )
     }

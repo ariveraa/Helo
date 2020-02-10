@@ -38,15 +38,21 @@ module.exports ={
         req.session.destroy(); 
         res.sendStatus(200); 
     }, 
-    getUser: async(req,res) => {
-       
-        const{id} = req.session.user;
-        const db = req.app.get('db'); 
+    getUser: (req,res) => {
+        // async
+        // const{id} = req.session.user;
+        // const db = req.app.get('db'); 
+        if (req.session.user) {
+			res.status(200).send(req.session.user);
+		} else {
+            res.status(200).send('');
+           
+		}
     
-        let [user] = await db.get_user(id);
+        // let [user] = await db.get_user(id);
         
-        delete user.password; 
+        // delete user.password; 
         
-        res.status(200).send(user); 
+        // res.status(200).send(user); 
     }
 }

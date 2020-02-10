@@ -1,5 +1,6 @@
 import React, {Component} from 'react'; 
 import axios from 'axios'; 
+import './single.css';
 
 
 class SinglePost extends Component{ 
@@ -25,12 +26,15 @@ class SinglePost extends Component{
     render(){ 
         console.log(this.state.postInfo)
         return(  
-        <div> 
+        <div className = 'single-post'> 
+        <div className = 'post-header'>
             <h4>{this.state.postInfo.title}</h4>
-            <img src = {this.state.postInfo.img} alt = 'post pic'/> 
-            <p>{this.state.postInfo.content}</p>
-            <p>{this.state.postInfo.username}</p>
-            <img src = {this.state.postInfo.profile_pic} alt = 'profile pic'/>
+            <p id= 'post-username'>{this.state.postInfo.username}</p>
+            <img className='posts-pic' src = {this.state.postInfo.profile_pic} alt = 'profile pic'/>
+        </div>
+            <img id='post-pic' src = {this.state.postInfo.img} alt = 'post pic'/> 
+            <p id = 'post-content'>{this.state.postInfo.content}</p>
+         
 
         </div>
         )

@@ -27,7 +27,7 @@ class Form extends Component {
     render(){
         const{title,img,content} = this.state
         return( 
-            <div>
+            <div className = 'form'>
                 <h3>New Post</h3>
                 <p>Title:</p>
                 <input name = 'title' placeholder = 'enter title' onChange = {event => {this.handleChange(event)}}/>
